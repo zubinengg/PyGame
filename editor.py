@@ -7,6 +7,7 @@ from scripts.tilemap import Tilemap
 RENDER_SCALE = 2.0
 
 
+# https://youtu.be/2gABYM5M0ww?t=9371
 class Editor:
     def __init__(self):
         pygame.init()
@@ -45,7 +46,7 @@ class Editor:
             current_tile_img = self.assets[self.tile_list[self.tile_group]][
                 self.tile_variant
             ].copy()
-            current_tile_img.set_alpha(100)
+            current_tile_img.set_alpha(160)
 
             self.display.blit(current_tile_img, (5, 5))
 
@@ -56,7 +57,13 @@ class Editor:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        clicking = True
+                        self.clicking = True
+                    if event.button == 3:
+                        self.right_clicking = True
+                    if event.button == 4:
+                        self.tile_group = (self.tile_group - 1) % len(self.tile_list)
+                    if event.button == 5:
+                        self.tile_group = (self.tile_group + 1) % len(self.tile_list)
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
