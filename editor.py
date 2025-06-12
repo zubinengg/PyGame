@@ -7,7 +7,7 @@ from scripts.tilemap import Tilemap
 RENDER_SCALE = 2.0
 
 
-# https://youtu.be/2gABYM5M0ww?t=9434
+# https://youtu.be/2gABYM5M0ww?t=10024
 class Editor:
     def __init__(self):
         pygame.init()
@@ -47,9 +47,12 @@ class Editor:
         while True:
             self.display.fill((0, 0, 0))
 
-            render_scrool = (int(self.scroll[0]), int(self.scroll[1]))
+            self.scroll[0] += (self.movement[1]-self.movement[0]) * 2
+            self.scroll[1] += (self.movement[3]-self.movement[2]) * 2
 
-            self.tilemap.render(self.display, offset=render_scrool)
+            render_scroll = (int(self.scroll[0]), int(self.scroll[1]))
+
+            self.tilemap.render(self.display, offset=render_scroll)
 
             current_tile_img = self.assets[self.tile_list[self.tile_group]][self.tile_variant].copy(
             )
@@ -69,7 +72,7 @@ class Editor:
                     del self.tilemap.tilemap[tile_loc]
 
             self.display.blit(
-                current_tile_img, (self.tile_pos[0]*self.tilemap.tile_size-self.scroll[0], self.tile_pos[1]*self))
+                current_tile_img, (tile_pos[0]*self.tilemap.tile_size-self.scroll[0], tile_pos[1]*self.tilemap.tile_size-self.scroll[1]))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -106,24 +109,24 @@ class Editor:
                         self.right_clicking = False
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         self.movement[0] = True
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         self.movement[1] = True
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_w:
                         self.movement[2] = True
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_s:
                         self.movement[3] = True
                     if event.key == pygame.K_LSHIFT:
                         self.shift = True
                 if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LEFT:
+                    if event.key == pygame.K_a:
                         self.movement[0] = False
-                    if event.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_d:
                         self.movement[1] = False
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_w:
                         self.movement[2] = False
-                    if event.key == pygame.K_DOWN:
+                    if event.key == pygame.K_s:
                         self.movement[3] = False
                     if event.key == pygame.K_LSHIFT:
                         self.shift = False
