@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # https://youtu.be/2gABYM5M0ww?t=6403
+# https://github.com/practical-tutorials/project-based-learning?tab=readme-ov-file
 # Explore
 import pygame
 import sys
