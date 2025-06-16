@@ -46,6 +46,13 @@ class Tilemap:
                     tile['pos'][0] * self.tile_size, tile['pos'][1] * self.tile_size, self.tile_size, self.tile_size))
         return rects
 
+    def autotile(self):
+        for loc in self.tilemap:
+            tile = self.tilemap[loc]
+            neighbors = set()
+
+        pass
+
     def render(self, surf, offset=(0, 0)):
         for tile in self.offgrid_tiles:
             surf.blit(self.game.assets[tile['type']][tile['variant']],
