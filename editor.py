@@ -69,6 +69,12 @@ class Editor:
             tile_pos = (int(mpos[0]+self.scroll[0])//self.tilemap.tile_size,
                         int(mpos[1]+self.scroll[1])//self.tilemap.tile_size)
 
+            if self.ongrid:
+                self.display.blit(
+                    current_tile_img, (tile_pos[0] * self.tilemap.tile_size - self.scroll[0], tile_pos[1] * self.tilemap.tile_size - self.scroll[1]))
+            else:
+                self.display.blit(current_tile_img, mpos)
+
             if self.clicking and self.ongrid:
                 self.tilemap.tilemap[str(tile_pos[0])+';'+str(tile_pos[1])] = {
                     'type': self.tile_list[self.tile_group], 'variant': self.tile_variant, 'pos': tile_pos}
@@ -83,11 +89,7 @@ class Editor:
                     if tile_r.collidepoint(mpos):
                         self.tilemap.offgrid_tiles.remove(tile)
 
-            if self.ongrid:
-                self.display.blit(
-                    current_tile_img, (tile_pos[0]*self.tilemap.tile_size-self.scroll[0], tile_pos[1]*self.tilemap.tile_size-self.scroll[1]))
-            else:
-                self.display.blit(current_tile_img, mpos)
+            self.display.blit(current_tile_img, (5, 5))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -139,6 +141,8 @@ class Editor:
                         self.shift = True
                     if event.key == pygame.K_g:
                         self.ongrid = not self.ongrid
+                    if event.key == pygame.K_t:
+                        self.tilemap.autotile()
                     if event.key == pygame.K_o:
                         self.tilemap.save('map.json')
                 if event.type == pygame.KEYUP:
