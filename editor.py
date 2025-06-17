@@ -7,7 +7,7 @@ from scripts.tilemap import Tilemap
 RENDER_SCALE = 2.0
 
 
-# https://youtu.be/2gABYM5M0ww?t=10024
+# https://youtu.be/2gABYM5M0ww?t=10024 Hack Nerd Font
 class Editor:
     def __init__(self):
         pygame.init()
@@ -73,7 +73,8 @@ class Editor:
                 self.display.blit(
                     current_tile_img, (tile_pos[0] * self.tilemap.tile_size - self.scroll[0], tile_pos[1] * self.tilemap.tile_size - self.scroll[1]))
             else:
-                self.display.blit(current_tile_img, mpos)
+                temp = (int(mpos[0]), int(mpos[1]))
+                self.display.blit(current_tile_img, temp)
 
             if self.clicking and self.ongrid:
                 self.tilemap.tilemap[str(tile_pos[0])+';'+str(tile_pos[1])] = {
