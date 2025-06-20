@@ -59,6 +59,7 @@ class Game:
         self.scroll = [0, 0]
 
         # data\images\entities\player.png
+        # ok
         # data\images\tiles\decor
 
     def run(self):
