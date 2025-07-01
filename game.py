@@ -99,6 +99,9 @@ class Game:
                         if self.player.velocity[1] >= 0 and self.player.velocity[1] <= 0.5:
                             pass
                         self.player.velocity[1] = -3
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
 
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
