@@ -36,6 +36,15 @@ class Tilemap:
                 matches.append(tile.copy())
                 if not keep:
                     self.offgrid_tiles.remove(tile)
+        
+        for loc in self.tilemap:
+            tile = self.tilemap[loc]
+            if (tile['type'],title['variant']) in id_pairs:
+                matches.append(tile.copy())
+                matches[-1]['pos']= matches[-1]['pos'].copy()
+                matches[-1]['pos'][0] *= self.tile_size
+                matches[-1]['pos'][1] *= self.tile_size
+
 
             pass
         
